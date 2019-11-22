@@ -6,6 +6,7 @@ Explore US Bikeshare Data.
 
 ### Description
 With this project we analyze the bike sharing system for the cities of Chicago, New York City and Washington DC.
+The user can choose different time frames to view statistics of the chosen city.
 
 ### Files used
 bikeshare.py
