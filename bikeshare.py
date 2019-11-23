@@ -19,7 +19,7 @@ def get_filters():
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
         try:
-            city = str(input('Data available for Chicago, New York City and Washington. \n' 
+            city = str(input('Data available for Chicago, New York City and Washington. \n'
                              'What city do you want to analyze? \n')).lower()
         except ValueError:
             print('Not a valid city, try something else')
@@ -27,7 +27,7 @@ def get_filters():
             print('Not a valid city, try something else')
         else:
             break
-        
+
 
     # TO DO: get user input for month (all, january, february, ... , june)
     while True:
@@ -67,15 +67,15 @@ def load_data(city, month, day):
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
-    
+
     df = pd.read_csv(CITY_DATA[city])
-    
+
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
+
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.weekday_name
 
-    
+
     if month != 'all':
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month) + 1
@@ -96,25 +96,23 @@ def time_stats(df):
 
     # TO DO: display the most common month
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
+
     df['month'] = df['Start Time'].dt.month_name()
     c_month = df['month'].mode()[0]
-    print('The most common month of travel is {}'.format(c_month))
-    
 
     # TO DO: display the most common day of week
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
+
     df['day'] = df['Start Time'].dt.weekday_name
     c_day = df['day'].mode()[0]
-    print('The most common day of travel is {}'.format(c_day))
 
     # TO DO: display the most common start hour
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
+
     df['hour'] = df['Start Time'].dt.hour
     c_hour = df['hour'].mode()[0]
-    print('The most common hour of travel is {}'.format(c_hour))
+
+    print('The most common month of travel is {}, the most common day of travel is {} and the most common hour of travel is {}.'.format(c_month, c_day, c_hour))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -151,11 +149,11 @@ def trip_duration_stats(df):
 
     # TO DO: display total travel time
     tot_trip = df['Trip Duration'].sum()
-    print('Total travel time is {} seconds'.format(tot_trip))
 
     # TO DO: display mean travel time
     mean_trip = df['Trip Duration'].mean()
-    print('Mean travel time is {} seconds'.format(mean_trip))
+
+    print('Total travel time is {} seconds and the mean travel time is {} seconds.'.format(tot_trip,mean_trip))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
